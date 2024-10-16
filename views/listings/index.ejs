@@ -1,0 +1,103 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="filters">
+  <div class="left-filter">
+    <!-- Filter Buttons with correct event handling -->
+    <div class="filter" data-category="Trending">
+      <div class="icon"><i class="fa-solid fa-fire"></i></div>
+      <div class="text">Trending</div>
+    </div>
+    <div class="filter" data-category="Rooms">
+      <div class="icon"><i class="fa-solid fa-bed"></i></div>
+      <div class="text">Rooms</div>
+    </div>
+    <div class="filter" data-category="Cabin">
+      <div class="icon"><i class="fa-solid fa-person-shelter"></i></div>
+      <div class="text">Cabin</div>
+    </div>
+    <div class="filter" data-category="Adventure">
+      <div class="icon"><i class="fa-solid fa-campground"></i></div>
+      <div class="text">Adventure</div>
+    </div>
+    <div class="filter" data-category="Countryside">
+      <div class="icon"><i class="fa-solid fa-tree"></i></div>
+      <div class="text">Countryside</div>
+    </div>
+    <div class="filter" data-category="Ski">
+      <div class="icon"><i class="fa-solid fa-skiing"></i></div>
+      <div class="text">Ski</div>
+    </div>
+    <div class="filter" data-category="Nature">
+      <div class="icon"><i class="fa-solid fa-leaf"></i></div>
+      <div class="text">Nature</div>
+    </div>
+    <div class="filter" data-category="Luxury">
+      <div class="icon"><i class="fa-solid fa-crown"></i></div>
+      <div class="text">Luxury</div>
+    </div>
+    <div class="filter" data-category="Lake">
+      <div class="icon"><i class="fa-solid fa-water"></i></div>
+      <div class="text">Lake</div>
+    </div>
+    <div class="filter" data-category="Beach">
+      <div class="icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+      <div class="text">Beach</div>
+    </div>
+    <div class="filter" data-category="Historic">
+      <div class="icon"><i class="fa-solid fa-landmark"></i></div>
+      <div class="text">Historic</div>
+    </div>
+    <div class="filter" data-category="Mountain">
+      <div class="icon"><i class="fa-solid fa-mountain"></i></div>
+      <div class="text">Mountain</div>
+    </div>
+  </div>
+
+  <div class="right-filter">
+    <!-- Tax Toggle -->
+    <div class="tax-toggle">
+      <div class="form-check form-switch form-check-reverse">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Listings Section -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%=listing._id%>" class="listing-link">
+      <div class="card col listing-card listing-hover-card">
+        <img src="<%=listing.image.url%>" style="height: 20rem" class="card-img-top" alt="listing_image" />
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b><br />
+            &#8377;<%= listing.price.toLocaleString("en-IN") %> /night
+            <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+          </p>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<script type="module">
+  // Handle tax visibility toggle
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  let tax_info = document.querySelectorAll(".tax-info");
+  taxSwitch.addEventListener("click", () => {
+    for (const tax of tax_info) {
+      tax.style.visibility = tax.style.visibility === "visible" ? "hidden" : "visible";
+    }
+  });
+
+  // Add event listeners for filter clicks
+  document.querySelectorAll('.filter').forEach(filter => {
+    filter.addEventListener('click', function () {
+      const category = this.getAttribute('data-category');
+      // Redirect to the selected category
+      window.location.href = `/listings/?category=${encodeURIComponent(category)}`;
+    });
+  });
+</script>

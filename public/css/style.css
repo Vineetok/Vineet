@@ -1,0 +1,206 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
+}
+
+/* NAVBAR STYLING */
+.navbar {
+  height: 5rem;
+  background-color: white;
+}
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+}
+.nav-link {
+  color: #222222 !important;
+}
+
+/* FOOTER STYLING */
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+  width: 100%;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.f-info-socials i {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+.f-info-brand {
+  width: 100%;
+}
+.f-info {
+  text-align: center;
+  display: flex;
+  height: 8rem;
+  background-color: #ebebeb;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+  text-align: center;
+ 
+}
+
+/* CARD STYLING */
+
+.listing-card {
+  border: none !important;
+  margin-bottom: 2rem;
+}
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+.card-body {
+  padding: 0 !important;
+}
+.card-text {
+  font-weight: 400 !important;
+}
+.listing-link {
+  text-decoration: none;
+}
+
+.card-img-overlay {
+  opacity: 0;
+}
+.card-img-overlay:hover {
+  opacity: 0.3;
+  background-color: white;
+}
+
+/* NEW PAGE(new.ejs) button */
+.add-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+
+/* EDIT BTN (EDIT.EJS)*/
+
+.edit-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+
+/* SHOW.EJS */
+
+.show-img {
+  height: 40vh;
+}
+.btns {
+  display: flex;
+}
+.show-card {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* MAP STYLING */
+
+#map {
+  height: 400px;
+  width: 80vh;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-filter {
+  display: flex;
+  width: 75%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  transition: all 0.2s;
+  transform: scale(0.98);
+  will-change: transform;
+  user-select: none;
+  cursor: pointer;
+}
+.left-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.left-filter.active {
+  background: rgba(255, 255, 255, 0.3);
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  transform: scale(1);
+}
+
+.right-filter {
+  display: flex;
+  justify-content: right;
+}
+
+.filter,
+.tax-toggle {
+  margin: 1rem 0rem 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 1rem;
+  border-radius: 0.8rem;
+}
+
+.filter {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.filter:hover {
+  opacity: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.filter .text {
+  font-size: 1ch;
+  text-wrap: nowrap;
+}
+
+.tax-toggle {
+  width: 15rem;
+  padding: 5px 0rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 993px) {
+  .tax-toggle {
+    display: none;
+  }
+  .left-filter {
+    width: 100%;
+  }
+}
+
+.tax-info {
+  visibility: hidden;
+}
+
+.last {
+  justify-self: end;
+}
