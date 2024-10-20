@@ -144,8 +144,6 @@ module.exports.updateListing = async (req, res) => {
     };
   }
 
-  listing = await addCoordinates(listing);
-  await listing.save();
 
   req.flash("success", "Listing Updated");
   res.redirect(`/listings/${id}`);
