@@ -8,14 +8,14 @@ style: 'mapbox://styles/mapbox/streets-v12', // style URL
 center: listing.geometry.coordinates, // starting position [lng, lat]
 zoom: 9 // starting zoom
 });
-console.log(listing.geometry.coordinates); // Check if [lng, lat] is correctly logged
 
 
 const marker=new mapboxgl.Marker({color:"red"})
 .setLngLat(listing.geometry.coordinates)
 .setPopup(
-    new mapboxgl.Popup({offset:25}).setHTML(
-    `<h4>${listing.title}</h4><p>Exact location wil be provided after booking!</p>`
+    new mapboxgl
+    .Popup({offset:25})
+    .setHTML(`<h4>${listing.title}</h4><p>Exact location wil be provided after booking!</p>`
 )
 )
 .addTo(map);//listing.geometry.coordinates
