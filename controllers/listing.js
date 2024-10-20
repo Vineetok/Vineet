@@ -8,16 +8,21 @@ const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 const addCoordinates = async (listing) => {
   let response = await geocodingClient
     .forwardGeocode({
-      query: listing.location,
+      query: listing.location,  // Ensure it takes listing.location
       limit: 1,
     })
     .send();
-   
+ 
+    if (response.body.features && response.body.features.length > 0) {
+      listing.geometry = response.body.features[0].geometry;
+    } else {
+      throw new ExpressError(400, "Location not found");
+    }
+    return listing;
+  };
 
 
-  listing.geometry = response.body.features[0].geometry;
-  return listing;
-};
+
 
 module.exports.index = async (req, res) => {
   let search = req.query.search || "";
@@ -94,17 +99,8 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-  // let {title, description, image, price, country, location} = req.body;
-  // if(!req.body.listing) {
-  //     throw new ExpressError(400, "Send Valid Data");
-  // }
-  let response = await geocodingClient
-    .forwardGeocode({
-      query: req.body.listing.location,
-      limit: 1,
-    })
-    .send();
-   
+ 
+
     
   let url = req.file.path;
   let filename = req.file.filename;
@@ -116,10 +112,8 @@ module.exports.createListing = async (req, res, next) => {
     filename,
   };
 
-  newListing.geometry=response.body.features[0].geometry;
+  newListing = await addCoordinates(newListing);
   let savedListing = await newListing.save();
-  console.log(savedListing);
-  await newListing.save();
 
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
