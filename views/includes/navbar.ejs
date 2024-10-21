@@ -1,11 +1,25 @@
 <style>
-  .search-btn {
+ /* General Navbar Styling */
+.navbar {
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for the navbar */
+  padding: 10px 20px;
+}
+
+.navbar-brand i {
+  font-size: 24px; /* Larger icon size for the brand logo */
+  color: #fe424d;
+}
+
+/* Search Button Styling */
+.search-btn {
   background-color: #fe424d;
   color: #fff;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 50px; /* Rounded button */
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -13,8 +27,44 @@
   background-color: #e83c45; /* Darker shade for hover effect */
   color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow on hover */
-  border: none;
 }
+
+.search-input {
+  border-radius: 50px; /* Rounded search input */
+  padding: 10px 20px;
+  border: 1px solid #ced4da;
+  width: 350px; /* Adjust width for balance */
+}
+
+/* Adjust Navbar Links */
+.nav-link {
+  font-size: 16px;
+  margin-right: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #fe424d; /* Hover effect for nav links */
+}
+
+/* Sign up / Login / Logout buttons */
+.navbar-nav a.nav-link b {
+  font-weight: bold;
+  color: #fe424d;
+}
+
+.navbar-nav a.nav-link b:hover {
+  color: #e83c45;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-input {
+    width: 250px; /* Adjust for smaller screens */
+  }
+}
+
 
 </style>
 
