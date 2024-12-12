@@ -45,7 +45,18 @@ router.get("/:id/edit",
     isOwner,
      wrapAsync(listingController.renderEditForm));
 
-
+// New Route - Show Invoice for a Listing
+router.get(
+   "/:id/invoice",
+   isLoggedin, // Require the user to be logged in
+   wrapAsync(async (req, res) => {
+     const listing = await Listing.findById(req.params.id);
+     if (!listing) {
+       return res.status(404).send("Listing not found");
+     }
+     res.render("listings/invoice", { listing }); // Render the invoice view
+   })
+ );
 
 
 

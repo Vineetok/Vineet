@@ -1,0 +1,29 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<style>
+    .card {
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    .card-title {
+        color: #333;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card col-md-6 offset-md-3">
+        <div class="card-body">
+            <h2 class="card-title text-center">Invoice</h2>
+            <hr>
+            <p><b>Listing Name:</b> <%= listing.title %></p>
+            <p><b>Location:</b> <%= listing.location %></p>
+            <p><b>Price:</b> ₹<%= listing.price.toLocaleString("en-IN") %></p>
+            <hr>
+            <p class="text-center">Thank you for your interest!</p>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/listings/<%= listing._id %>" class="btn btn-dark">Back to Listing</a>
+    </div>
+</div>
