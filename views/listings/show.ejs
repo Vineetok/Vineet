@@ -66,14 +66,34 @@
           <button type="submit" class="btn btn-dark">Delete</button>
         </form>
       </div>
+      
+      <!-- Book/Unbook Button for Owner -->
+      <div class="d-flex justify-content-center mb-3">
+        <% if (listing.booked) { %>
+          <!-- If listing is booked, allow the owner to unbook it -->
+          <form action="/listings/<%= listing._id %>/unbook" method="POST">
+            <button type="submit" class="btn btn-danger">Unbook</button>
+          </form>
+        <% } else { %>
+          <!-- If listing is unbooked, allow the owner to book it -->
+          <form action="/listings/<%= listing._id %>/book" method="POST">
+            <button type="submit" class="btn btn-primary">Book</button>
+          </form>
+        <% } %>
+      </div>
     <% } else { %>
       <!-- Button visible to other users -->
-      <div class="d-flex justify-content-center mb-3">
-        <a href="/listings/<%= listing._id %>/invoice" class="btn btn-primary">Book</a>
-      </div>
+      <% if (listing.booked) { %>
+        <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-danger" disabled>Property is full</button>
+        </div>
+      <% } else { %>
+        <div class="d-flex justify-content-center mb-3">
+            <a href="/listings/<%= listing._id %>/invoice" class="btn btn-primary">Book</a>
+        </div>
+      <% } %>
     <% } %>
-  <% } %>
-  
+<% } %>
 
 <!-- Review Section -->
 <% if(currUser) { %>
@@ -110,28 +130,30 @@
 </div>
 <% } %>
 
+
 <!-- Display Reviews -->
-<% if(listing.reviews.length > 0) { %>
-<div class="row">
-    <p><b>All reviews</b></p>
-    <% listing.reviews.forEach(review => { %>
-    <div class="card col-md-5 ms-3 mb-3">
-        <div class="card-body">
-            <h5 class="card-title">@<%= review.author.username %></h5>
-            <p class="card-text">
-                <p class="starability-result card-text" data-rating="<%= review.rating %>">
-                    Rated: <%= review.rating %> stars
+<% if (listing.reviews.length > 0) { %>
+    <div class="reviews-container">
+        <p><b>All reviews</b></p>
+        <% listing.reviews.forEach(review => { %>
+        <div class="card review-card">
+            <div class="card-body">
+                <h5 class="card-title">@<%= review.author.username %></h5>
+                <p class="card-text">
+                    <p class="starability-result card-text" data-rating="<%= review.rating %>">
+                        Rated: <%= review.rating %> stars
+                    </p>
+                    <p class="card-text"><%= review.comment %></p>
                 </p>
-                <p class="card-text"><%= review.comment %></p>
-            </p>
+            </div>
+            <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <button class="btn btn-sm btn-dark">Delete</button>
+            </form>
         </div>
-        <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-            <button class="btn btn-sm btn-dark">Delete</button>
-        </form>
+        <% }); %>
     </div>
-    <% }); %>
-</div>
-<% } %>
+    <% } %>
+    
 
 <!-- Map Section -->
 <div class="col-6 offset-3 mb-3">

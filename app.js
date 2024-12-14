@@ -72,6 +72,11 @@ const sessionOptions={
 // app.get("/", (req, res) => {
 //     res.send("Hi I am root");
 // });
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user || null; // Assuming you’re using Passport.js for authentication
+    next();
+});
+
 
 app.use(session(sessionOptions));
 app.use(flash());

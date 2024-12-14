@@ -1,116 +1,134 @@
 <style>
- /* General Navbar Styling */
-.navbar {
-  background-color: #ffffff; /* White background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for the navbar */
-  padding: 10px 20px;
-}
-
-.navbar-brand i {
-  font-size: 24px; /* Larger icon size for the brand logo */
-  color: #fe424d;
-}
-
-/* Search Button Styling */
-.search-btn {
-  background-color: #fe424d;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 50px; /* Rounded button */
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.search-btn:hover {
-  background-color: #e83c45; /* Darker shade for hover effect */
-  color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow on hover */
-}
-
-.search-input {
-  border-radius: 50px; /* Rounded search input */
-  padding: 10px 20px;
-  border: 1px solid #ced4da;
-  width: 350px; /* Adjust width for balance */
-}
-
-/* Adjust Navbar Links */
-.nav-link {
-  font-size: 16px;
-  margin-right: 15px;
-  color: #333;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  color: #fe424d; /* Hover effect for nav links */
-}
-
-/* Sign up / Login / Logout buttons */
-.navbar-nav a.nav-link b {
-  font-weight: bold;
-  color: #fe424d;
-}
-
-.navbar-nav a.nav-link b:hover {
-  color: #e83c45;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .search-input {
-    width: 250px; /* Adjust for smaller screens */
+  /* General Navbar Styling */
+  .navbar {
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for the navbar */
+    padding: 10px 20px;
   }
-}
 
+  .navbar-brand i {
+    font-size: 24px; /* Larger icon size for the brand logo */
+    color: #fe424d;
+  }
 
+  /* Search Button Styling */
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px; /* Rounded button */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .search-btn:hover {
+    background-color: #e83c45; /* Darker shade for hover effect */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+  }
+
+  .search-input {
+    border-radius: 50px; /* Rounded search input */
+    padding: 10px 20px;
+    border: 1px solid #ced4da;
+    width: 350px; /* Adjust width for balance */
+  }
+
+  /* Adjust Navbar Links */
+  .nav-link {
+    font-size: 16px;
+    margin-right: 15px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .nav-link:hover {
+    color: #fe424d; /* Hover effect for nav links */
+  }
+
+  /* User Information Styling */
+  .navbar-nav .user-info {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+  }
+
+  /* Circular User Initial Badge */
+  .user-initial {
+    width: 40px;
+    height: 40px;
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 </style>
 
-
-<nav class="navbar navbar-expand-md navbar-light bg-body-light navbar-border sticky-top">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-body-light sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+    </a>
     <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left: Explore Link -->
       <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>   
-    </div>
-    <div class="navbar-nav ms-auto">
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2 search-input"
-          type="search"
-          id="search"
-          placeholder="Search Destination" />
-        <button class="btn search-btn" type="submit" id="search-btn">
-          <i class="fa-solid fa-magnifying-glass"></i>Search
-        </button>
-      </form>
-    </div>
-    <div class="navbar-nav ms-auto">
-      <a class="nav-link" href="/listings/new">AirBnb your Home</a>
-      <% if(!currUser){%>
-      <a class="nav-link active" href="/signup"><b>Sign up</b></a>
-      <a class="nav-link" href="/login"><b>Log in</b></a>
-      <%}%><% if(currUser){%>
-      <a class="nav-link" href="/logout"><b>Log out</b></a>
-      <%}%>
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- Center: Search -->
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2 search-input"
+            type="search"
+            id="search"
+            placeholder="Search Destination" />
+          <button class="btn search-btn" type="submit" id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Auth Links -->
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">AirBnb your Home</a>
+        <% if (!currUser) { %>
+          <a class="nav-link active" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } else { %>
+          <!-- Display Username and Email -->
+          <span class="nav-link user-info">
+            Welcome, <%= currUser.username %>!
+          </span>
+          <!-- Logout Button -->
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+          <!-- User Initial Badge -->
+          <div class="user-initial">
+            <%= currUser.username.charAt(0).toUpperCase() %>
+          </div>
+        <% } %>
+      </div>
     </div>
   </div>
-</div>
 </nav>
-
 
 <script type="module">
   let searchBtn = document.getElementById("search-btn");

@@ -9,8 +9,8 @@ const listingSchema = new Schema({
     },
     description: String,
     image: {
-    url:String,
-    filename:String,
+        url: String,
+        filename: String,
     },
     price: Number,
     location: String,
@@ -25,29 +25,47 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    geometry:{
+    geometry: {
         type: {
-          type: String, // Don't do `{ location: { type: String } }`
-          enum: ['Point'],
-          required:true, // 'location.type' must be 'Point'
+            type: String, // Don't do `{ location: { type: String } }`
+            enum: ['Point'],
+            required: true, // 'location.type' must be 'Point'
         },
+    },
     coordinates: {
         type: [Number],
-        required:true,
-      }
-},
-category:{
-    type:String,
-    enum:['Cabin','Adventure','Countryside','Trending','Ski','Nature','Luxury','Lake','Beach','Historic','Mountain','Urban', 'Rooms', 'Iconic_Cities', 'Mountains', 'Castles', 'Amazing_Pool', 'Camping', 'Farms', 'Arctic', 'Domes', 'House_Boats'],
-}
-
+        required: true,
+    },
+    category: {
+        type: String,
+        enum: [
+            'Cabin', 'Adventure', 'Countryside', 'Trending', 'Ski', 'Nature', 'Luxury',
+            'Lake', 'Beach', 'Historic', 'Mountain', 'Urban', 'Rooms', 'Iconic_Cities',
+            'Mountains', 'Castles', 'Amazing_Pool', 'Camping', 'Farms', 'Arctic', 'Domes',
+            'House_Boats'
+        ],
+    },
+    booked: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-listingSchema.post("findOneAndDelete",async(listing)=>{
-    if(listing){
-        await review.deleteMany({_id: {$in : listing.reviews}});
-      }
-})
+// Update booking status to true when a user confirms a booking
+listingSchema.methods.bookProperty = async function() {
+    if (this.booked) {
+        throw new Error("Property is already booked.");
+    }
+    this.booked = true;
+    await this.save();
+};
+
+// Hook to delete reviews when a listing is deleted
+listingSchema.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await review.deleteMany({ _id: { $in: listing.reviews } });
+    }
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;

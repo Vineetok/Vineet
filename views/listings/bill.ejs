@@ -1,0 +1,34 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+    <h2>Enter Your Booking Details</h2>
+    <form action="/listings/<%= listing._id %>/confirm" method="POST">
+        <!-- Name Field -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+            />
+        </div>
+        <!-- Booking Date Field -->
+        <div class="mb-3">
+            <label for="bookingDate" class="form-label">Booking Date</label>
+            <input
+                type="date"
+                class="form-control"
+                id="bookingDate"
+                name="bookingDate"
+                required
+            />
+        </div>
+        <!-- Price Display -->
+        <p>Price: &#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Proceed</button>
+    </form>
+</div>
