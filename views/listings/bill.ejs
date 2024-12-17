@@ -32,3 +32,22 @@
         <button type="submit" class="btn btn-primary">Proceed</button>
     </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const bookingDateInput = document.getElementById("bookingDate");
+
+        // Get today's date
+        const today = new Date();
+        const todayString = today.toISOString().split("T")[0];
+
+        // Get tomorrow's date
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 30);
+        const tomorrowString = tomorrow.toISOString().split("T")[0];
+
+        // Restrict available dates
+        bookingDateInput.setAttribute("min", todayString);
+        bookingDateInput.setAttribute("max", tomorrowString);
+    });
+</script>

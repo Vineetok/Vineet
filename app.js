@@ -107,6 +107,10 @@ app.use((req,res,next)=>{
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter); // Mounting the reviews router
 app.use("/",userRouter);
+app.use((req, res, next) => {
+    res.locals.currUser = req.user || null;  // Set currUser globally for all views
+    next();
+});
 
 
 app.all("*", (req, res, next) => {
